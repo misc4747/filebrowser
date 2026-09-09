@@ -42,6 +42,7 @@ http:
   baseURL: "/test/"
 server:
   minSearchLength: 2
+  searchResultLimit: 1000
   sources: *simple_sources
   logging: *simple_logging
 
@@ -78,6 +79,10 @@ userDefaults:
 
 	if Config.Http.BaseURL != "/test/" {
 		t.Errorf("Expected baseURL '/test/', got '%s'", Config.Http.BaseURL)
+	}
+
+	if Config.Server.SearchResultLimit != 1000 {
+		t.Errorf("Expected searchResultLimit 1000, got %d", Config.Server.SearchResultLimit)
 	}
 
 	if Config.Server.MinSearchLength != 2 {

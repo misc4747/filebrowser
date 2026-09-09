@@ -14,10 +14,7 @@ import (
 
 var SearchResultsCache = cache.NewCache[[]string](15 * time.Second)
 
-var (
-	sessionInProgress    sync.Map
-	DefaultSearchResults = 100
-)
+var sessionInProgress sync.Map
 
 type SearchResult struct {
 	Path       string `json:"path"`

@@ -80,7 +80,7 @@ func searchHandler(w http.ResponseWriter, r *http.Request, d *Context) (int, err
 		return http.StatusBadRequest, err
 	}
 
-	searchSize := indexing.DefaultSearchResults
+	searchSize := settings.Config.Server.SearchResultLimit
 	if searchOptions.largest {
 		searchSize = 200
 	}

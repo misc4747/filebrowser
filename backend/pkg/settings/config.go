@@ -850,6 +850,7 @@ func SetDefaults(generate bool) Settings {
 			BaseURL: "",
 		},
 		Server: Server{
+			SearchResultLimit:  100,
 			NumImageProcessors: 4,
 			DatabaseV2: Database{
 				Path: databaseV2,
