@@ -75,6 +75,7 @@ import { isRawImageMimeType } from "@/utils/mimetype";
 import { convertToVTT, getSubtitleFormatExtension } from "@/utils/subtitles";
 import { globalVars } from "@/utils/constants";
 import { navigatePlaybackQueue } from "@/utils/playbackQueue.js";
+import { shouldPrefetchDirectoryMetadata } from "@/utils/metadataCache.js";
 import {
   hasActiveSession as hasActivePipSession,
   pendingInlineResumeFor,
@@ -285,7 +286,7 @@ export default {
   },
   methods: {
     async attachDirMediaMetadata(listing, dirPath) {
-      if (!listing?.length) return;
+      if (!listing?.length || !shouldPrefetchDirectoryMetadata(listing)) return;
       try {
         const isShare = getters.isShare();
         const metaMap = isShare

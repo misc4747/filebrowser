@@ -64,3 +64,10 @@ export function invalidateDirMetadataCache(opts = {}) {
   cache.delete(getCacheKey({ isShare, source, hash, path, albumArt: false }));
   cache.delete(getCacheKey({ isShare, source, hash, path, albumArt: true }));
 }
+
+// Video folders can contain thousands of files. Probe videos when opened instead
+// of filling the shared ffmpeg queue before playback can request its metadata.
+export function shouldPrefetchDirectoryMetadata(items = []) {
+  return items.some((item) => item.type?.startsWith("audio"))
+    && !items.some((item) => item.type?.startsWith("video"));
+}

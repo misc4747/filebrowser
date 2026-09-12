@@ -24,12 +24,12 @@ import { extractSourceFromPath, removeLastDir, base64Encode, removeTrailingSlash
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import { globalVars } from "@/utils/constants";
 import { isRichTextPreviewMimeType } from "@/utils/mimetype";
-import { invalidateDirMetadataCache } from "@/utils/metadataCache.js";
+import { invalidateDirMetadataCache, shouldPrefetchDirectoryMetadata } from "@/utils/metadataCache.js";
 
 function directoryListingHasMediaChildren(req) {
   return (
     req?.type === "directory" &&
-    req.items?.some((i) => i.type?.startsWith("audio") || i.type?.startsWith("video"))
+    shouldPrefetchDirectoryMetadata(req.items)
   );
 }
 
